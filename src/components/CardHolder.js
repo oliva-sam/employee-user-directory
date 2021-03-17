@@ -7,12 +7,13 @@ class CardHolder extends Component {
         result: [],
         employeeDB: [],
         search: "",
+        sort: ""
     }
 
     componentDidMount = () =>{
         API.search()
         .then(res => {
-            console.log(res);
+           // console.log(res);
             let employees = res.data.results;
             let list = employees.map(employee => (
                 { 
@@ -23,7 +24,7 @@ class CardHolder extends Component {
                     picture: employee.picture.thumbnail
                 }
             ))
-            console.log(list)
+           // console.log(list)
             this.setState ({
                 result : list,
                 employeeDB: list,
@@ -49,13 +50,29 @@ class CardHolder extends Component {
                     employeeArr.push(employeeData[i])
                 }
         }
-        console.log(employeeArr);
+      //  console.log(employeeArr);
         this.setState({ result : employeeArr})
+    }
+
+    sortFirst = () => {
+    console.log(this.state.employeeDB)
+
+    }
+
+    sortLast = () => {
+        console.log(this.state.employeeDB)
+    
     }
 
     render() {
         return (
             <div className = "container">
+                <div>
+                    <h3> Sort by:</h3> 
+                    <button onClick={this.sortFirst}>First Name</button>
+                    <button onClick={this.sortLast}>Last Name</button>
+                </div>
+                <br/>
                 <form>
                     <input
                      name="searchName"
